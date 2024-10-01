@@ -1,0 +1,48 @@
+Plotting Distributions
+================================
+
+This example shows how to plot 1D histograms of parameters of interest. The example here shows the ToT distribution for pixel data and clusters data.
+
+.. _ex6_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex6_plot_distributions_luna_command.txt
+   :language: bash
+
+.. _ex6_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex6_plot_distributions.py
+   :language: python
+   :caption: Plot histograms
+   :linenos:
+
+.. _ex6_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex6_plot_distributions.txt
+   :language: python
+   :caption: Example Output
+
+.. container:: side-by-side-images
+
+    .. figure:: ../_static/examples_output/plots/ex6_plot_distributions_pixel_hit_tot.png
+       :width: 100%
+       :align: left
+       :alt: 2D histogram of pixel hits ToT
+
+       Time Over Threshold (ToT) Distribution for Pixel Hits
+
+    .. figure:: ../_static/examples_output/plots/ex6_plot_distributions_clusters_ctot.png
+       :width: 100%
+       :align: right
+       :alt: 2D histogram of clusters cToT
+
+       Charge Over Threshold (cToT) Distribution for Clusters
+

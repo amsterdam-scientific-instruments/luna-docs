@@ -1,0 +1,47 @@
+Time-walk Correction: Apply
+===========================
+
+Luna outputs timewalk correction matrix and lookup tables for correcting the ToA
+based on the magnitude of the ToT and a relationship inferred from your data. That
+relationship can be examined to refine your curve by adjusting the ctot-cut parameter.
+
+However once you are happy with your lookup table application of the correction is a
+simple matter of lookup and subtraction.
+
+.. _ex7_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex7_correct_toa_for_timewalk_luna_command.txt
+   :language: bash
+
+.. _ex7_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex7_correct_toa_for_timewalk.py
+   :language: python
+   :caption: Apply the timewalk correction
+   :linenos:
+
+.. _ex7_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex7_correct_toa_for_timewalk.txt
+   :language: python
+   :caption: Example Output
+
+.. figure:: ../_static/examples_output/plots/ex7_correct_toa_for_timewalk.png
+   :width: 80%
+   :align: right
+
+.. note::
+
+    Since we are (necessarily) using a small tpx3 file for the examples there is some
+    instability between the ToT=2000ns - 4000ns. This is because the time walk lookup
+    table is inferred directly from your data and since this dataset is minimal there
+    may not be enough data to fully inform the timewalk matrix.

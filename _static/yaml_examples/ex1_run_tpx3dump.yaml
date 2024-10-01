@@ -1,0 +1,11 @@
+timepixSchemaVersion: "1.0.0"
+datasets:
+  - id: "ds1"
+    description: "Example of how to run tpx3dump with yaml configuration file."
+    detectorType: Tpx3
+    data:
+      - path: "$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.tpx3"
+    analysis:
+      - id: "analysis1"
+        outputFile: ""$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.h5"
+        epsT: "150ns"

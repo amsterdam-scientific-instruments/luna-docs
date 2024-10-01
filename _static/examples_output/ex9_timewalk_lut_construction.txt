@@ -1,0 +1,11 @@
+<KeysViewHDF5 ['Clusters', 'ExposureTimeBoundaries', 'PixelHits', 'TimewalkLookupTable', 'TimewalkMatrix']>
+   CToT  ToT  AverageDToA  SumSquareDiff  Count        Std       Sem
+0   450   25    96.223969     53196212.0     12  21.054733  6.077978
+1   450   50    83.750008    119628920.0     25  21.875000  4.375000
+2   450   75    76.627617     66283176.0     24  16.618660  3.392270
+3   450  100    62.467461     91039528.0     48  13.771915  1.987805
+4   450  125    51.258690    118634712.0     72  12.836293  1.512772
+Calculating calibration curve for ctot_threshold=100
+Calculating calibration curve for ctot_threshold=500
+Calculating calibration curve for ctot_threshold=1000
+Calculating calibration curve for ctot_threshold=2000

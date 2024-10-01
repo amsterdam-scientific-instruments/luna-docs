@@ -1,0 +1,38 @@
+Plot Pixel Data: 2D Histogram Time Slice
+========================================
+
+Demonstration of how to plot a 2D histogram using only data from a specified time slice.
+
+.. _ex4_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex4_plot_pixel_2d_histogram_time_slice_luna_command.txt
+   :language: bash
+
+.. _ex4_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex4_plot_pixel_2d_histogram_time_slice.py
+   :language: python
+   :caption: Plot a 2D histogram of a time slice
+   :linenos:
+
+.. _ex4_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex4_plot_pixel_2d_histogram_time_slice.txt
+   :language: python
+   :caption: Example Output
+
+.. image:: ../_static/examples_output/plots/ex4_plot_pixel_2d_histogram_tot_time_slice.png
+   :align: center
+   :alt: 2D histogram of pixel hits
+   :width: 80%
+
+

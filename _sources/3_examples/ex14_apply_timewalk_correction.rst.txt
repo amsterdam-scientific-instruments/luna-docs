@@ -1,0 +1,47 @@
+Apply the timewalk correction
+=================================
+
+We first must have run ``tpx3dump process`` command on a dataset with the appropriate options
+to enable the calculation of the timewalk statistics. Afterwards we can run the ``tpx3dump apply-timewalk-corrrection``
+subcommand
+
+.. _ex14_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex14_apply_timewalk_correction_luna_command.txt
+   :language: bash
+
+.. _ex14_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex14_apply_timewalk_correction.py
+   :language: python
+   :caption: Applying the timewalk correction to a dataset
+   :linenos:
+
+.. _ex14_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex14_apply_timewalk_correction.txt
+   :language: python
+   :caption: Example Output
+
+
+.. raw:: html
+
+    <table>
+      <tr>
+        <td style="text-align: center;">
+          <img src="../_static/examples_output/plots/ex14_apply_timewalk_correction_toa_before_correction.png" alt="2D histogram of clusters before correction" style="width: 80%;" />
+        </td>
+        <td style="text-align: center;">
+          <img src="../_static/examples_output/plots/ex14_apply_timewalk_correction_toa_after_correction.png" alt="2D histogram of clusters after correction" style="width: 80%;" />
+        </td>
+      </tr>
+    </table>

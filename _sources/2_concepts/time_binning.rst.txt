@@ -1,0 +1,23 @@
+Time Binning
+============
+
+Luna processes tpx3 or tpx4 data as a continuous stream of data in a multithreaded context. The processing
+itself is done by constructing a computation graph consisting of "Nodes". Nodes are like little self contained programs
+operating an execution loop. At first they are completely idle as they are waiting for data to process. Then, raw data is
+read by the `Reader` and fed into the `Unpacker` which decodes the binary into real valued data.
+
+The `Reader` node then, is connected to the `Unpacker` via a channel from the crossbeams library. When the `Reader` node
+has read enough data, it packages it into a vector and passes ownership to the `Unpacker`. Similarly the `Unpacker` node
+connected to the `Sorter` node. The main question here is: how much data is enough data? Well in luna we handle this
+by caching data before processing that data. The volume of data that is cached is in units of time and are controlled
+by the two options `time-bin-interval` and `num-time-bins`. The cache can basically be thought of as a fixed size
+time ordered sequence of bins (or buckets). The number of bins is controlled by the `num-time-bins` argument whilst
+the amount of data that is put into a single time bin is controlled by the `time-bin-interval` (for instance 1s).
+
+As an example, the default parameters are 1s and 5 bins for the `time-bin-interval` and the `num-time-bins` options
+respectively. That means that a full 5s of data is cached before processing continues (with the earliest time bin).
+
+Users have full control of these two argument and some experimentation may be necessary to get them right. In general
+do not make the `time-bin-interval` too small nor the `num-time-bins` too large.
+
+

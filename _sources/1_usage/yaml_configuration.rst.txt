@@ -1,0 +1,107 @@
+.. _yaml-interface:
+
+==============
+Yaml Interface
+==============
+
+Refer to the `Luna schema <../_static/luna-v1.0.0.schema.json>`_ for detailed definitions and constraints. You can also provide
+this schema to your text editor (like `JetBrains IDE's <https://www.jetbrains.com/help/pycharm/json.html#ws_json_schema_add_custom>`_) to get
+autocomplete and as-you-type validations.
+
+Once you have a yaml configuration you can pass it to ``tpx3dump`` or ``tpx4dump`` with the ``yaml`` mode.
+
+.. code-block:: bash
+
+   ./tpx3dump yaml <full/path/to/configuration.yaml
+
+.. collapse:: Luna Schema
+    :name: yaml-configuration
+
+    - **timepixSchemaVersion** (string): The version of the schema this configuration complies with. Currently the only version is 1.0.0.
+    - **datasets** (array): A collection of datasets.
+
+    .. collapse:: dataset
+        :name: dataset-configuration
+
+          - **id** (string): A unique identifier for the dataset, incorporating an abbreviation for the application type.
+          - **application** (string): The application type of the dataset. Possible values: 'MSI', 'VMI', 'INT', 'NEU', 'PIV', 'COS', 'TEM', 'OTH'.
+          - **detectorType** (string): Detector type. Possible values: 'Tpx3', 'Tpx4'.
+          - **inputFormat** (string): The input format for Tpx4 detector type, constant across all configurations. Possible values: 'ASI', 'NIKHEF'.
+          - **data** (array): Configure input data paths for this analysis.
+
+            .. collapse:: data
+                :name: data-configuration
+
+                - **id** (string): The id for a data set. Should be unique.
+                - **name** (string): The name of a dataset.
+                - **path** (string): The path of the file or directory, relative to TimepixDataRoot root.
+
+          - **analysis** (array): Analysis configurations referencing the 'Analysis Configuration' definition.
+
+        .. collapse:: Analysis Configuration
+            :class: custom-summary
+            :name: analysis-configuration
+
+            This object defines the configuration for analysis.
+
+            **Properties**
+
+            - **id** (string): A unique identifier for the analysis configuration.
+            - **outputFile** (string): Path for the output file.
+            - **layout** (string): Either 'single' or 'quad'. Default: 'single'.
+            - **epsSpace** (integer): Space gap for the centroiding algorithm in unit of pixels. Default: 1.
+            - **epsTime** (string): Time gap for the centroiding algorithm with units (e.g., '500ns'). Valid units: s, ms, us, ns, ps, fs. Default: '100ns'.
+            - **disableClustering** (boolean): Disable clustering functionality which is on by default. Default: false.
+            - **ctotCut** (integer): The value of the cut used when computing the timewalk correction look up table. Must be increments of 25ns. Default: 1500.
+            - **timewalkFile** (string): A path to a hdf5 file from a previous run of tpx3dump which contains the timewalk correction matrix.
+            - **timeBinInterval** (string): The interval in units of time used to segment data for further processing after reading and unpacking. Default: 'all'.
+            - **numTimeBins** (integer): Number of time bins to use. Default: 5.
+            - **logLevel** (string): Logging level [possible values: off, trace, debug, info, warn, error]. Default: 'info'.
+            - **rawOnly** (boolean): Flag to indicate processing data from binary to raw data only, no sorting or clustering. Default: false.
+            - **nPhases** (integer): The value of the number of phases for the phase locked loop (PLL) used for acquisition. Default: 16.
+            - **inputFormat** (string): (tpx4dump only) The input format for Tpx4 detector type. Possible values: 'ASI', 'NIKHEF'.
+            - **maxDelay** (number): (tpx4dump only). The maximum delay difference between arrival of the heartbeat and the hits, expressed as a portion of wraparound period. Must be less than 1.0. Default is 1/4 of the wraparound period.
+            - **discardPixelData** (boolean): When true (default false), the PixelData is not output to hdf5.
+            - **tofTdcReference** (string): The TDC to use as a reference when calculating the time of flight (ToF). Possible values: ['TDC1Rising', 'TDC1Falling', 'TDC2Rising', 'TDC2Falling', '']. If not set (''), the ToF is ignored. Default: ''; 
+
+
+Example yaml configurations
+===========================
+
+.. note::
+
+    The environment variable ``$(ASI_TEST_SUITE)`` is used in these examples. This syntax allows you
+    to define arbitrary environment variables and use them in paths.
+
+Process tpx3 data from raw binary to real valued data
+------------------------------------------------------
+
+.. literalinclude:: ../_static/yaml_examples/ex1_run_tpx3dump.yaml
+   :language: yaml
+
+Discard PixelHit data
+----------------------
+
+.. literalinclude:: ../_static/yaml_examples/ex5_discard_pixel_hit_data.yaml
+   :language: yaml
+
+
+Multiple Configurations
+-----------------------
+
+.. literalinclude:: ../_static/yaml_examples/ex2_two_analyses_one_dataset.yaml
+   :language: yaml
+
+
+Yaml Anchors
+------------
+
+.. literalinclude:: ../_static/yaml_examples/ex3_use_yaml_anchors.yaml
+   :language: yaml
+
+
+Tpx4 Yaml
+---------
+
+.. literalinclude:: ../_static/yaml_examples/ex4_tpx4_example.yaml
+   :language: yaml

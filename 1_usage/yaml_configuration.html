@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Yaml Interface &#8212; luna 0.3.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6b2e5161" />
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/copytoclipboard.js?v=38cfd8db"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Concepts" href="../2_concepts/concepts.html" />
+    <link rel="prev" title="Command Line Interface" href="cli_configuration.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=orange data-md-color-accent=amber>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#1_usage/yaml_configuration" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="luna 0.3.2 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">luna-logo.png</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Luna Documentation</span>
+          <span class="md-header-nav__topic"> Yaml Interface </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">luna 0.3.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="usage.html" class="md-tabs__link">Usage</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="luna 0.3.2 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">luna-logo.png</i>
+      
+    </a>
+    <a href="../index.html"
+       title="luna 0.3.2 documentation">Luna Documentation</a>
+  </label>
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../index.html" class="md-nav__link">Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="usage.html" class="md-nav__link">Usage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="cli_configuration.html" class="md-nav__link">Command Line Interface</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Yaml Interface </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Yaml Interface</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#1-usage-yaml-configuration--page-root" class="md-nav__link">Yaml Interface</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#example-yaml-configurations" class="md-nav__link">Example yaml configurations</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#process-tpx3-data-from-raw-binary-to-real-valued-data" class="md-nav__link">Process tpx3 data from raw binary to real valued data</a>
+        </li>
+        <li class="md-nav__item"><a href="#discard-pixelhit-data" class="md-nav__link">Discard PixelHit data</a>
+        </li>
+        <li class="md-nav__item"><a href="#multiple-configurations" class="md-nav__link">Multiple Configurations</a>
+        </li>
+        <li class="md-nav__item"><a href="#yaml-anchors" class="md-nav__link">Yaml Anchors</a>
+        </li>
+        <li class="md-nav__item"><a href="#tpx4-yaml" class="md-nav__link">Tpx4 Yaml</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/1_usage/yaml_configuration.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/concepts.html" class="md-nav__link">Concepts</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/time_units.html" class="md-nav__link">Time Units in Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/time_binning.html" class="md-nav__link">Time Binning</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/clustering.html" class="md-nav__link">Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/timewalk.html" class="md-nav__link">Timewalk Correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/time_of_flight.html" class="md-nav__link">Time-of-Flight (ToF)</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/examples.html" class="md-nav__link">Examples</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex1_read_data.html" class="md-nav__link">Read Data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex2_read_data_time_units.html" class="md-nav__link">Read data, Unit Conversion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex3_plot_pixel_2d_histogram.html" class="md-nav__link">Plot Pixel Data: 2D Histogram</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex4_plot_pixel_2d_histogram_time_slice.html" class="md-nav__link">Plot Pixel Data: 2D Histogram Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex5_plot_cluster_2d_histogram.html" class="md-nav__link">Plot Pixel Data: Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex6_plot_distributions.html" class="md-nav__link">Plotting Distributions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex7_correct_toa_for_timewalk.html" class="md-nav__link">Time-walk Correction: Apply</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex8_timewalk_matrix.html" class="md-nav__link">Time-walk Correction: Matrix</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex9_timewalk_lut_construction.html" class="md-nav__link">Time-walk Correction: Constructing LUT</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex10_hdf5_compression_investigation.html" class="md-nav__link">Hdf5 Compression Investigation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex11_raw_only_analysis.html" class="md-nav__link">Raw only Analysis</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex12_disable_clustering.html" class="md-nav__link">Disable Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex13_kuttruff_clustering_algorithm.html" class="md-nav__link">The Kuttruff Clustering Algorithm</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex14_apply_timewalk_correction.html" class="md-nav__link">Apply the timewalk correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex15_accumulate_timewalk_statistics.html" class="md-nav__link">Accumulate timewalk statistics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex16_plot_tof.html" class="md-nav__link">Plot ToF</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#1-usage-yaml-configuration--page-root" class="md-nav__link">Yaml Interface</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#example-yaml-configurations" class="md-nav__link">Example yaml configurations</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#process-tpx3-data-from-raw-binary-to-real-valued-data" class="md-nav__link">Process tpx3 data from raw binary to real valued data</a>
+        </li>
+        <li class="md-nav__item"><a href="#discard-pixelhit-data" class="md-nav__link">Discard PixelHit data</a>
+        </li>
+        <li class="md-nav__item"><a href="#multiple-configurations" class="md-nav__link">Multiple Configurations</a>
+        </li>
+        <li class="md-nav__item"><a href="#yaml-anchors" class="md-nav__link">Yaml Anchors</a>
+        </li>
+        <li class="md-nav__item"><a href="#tpx4-yaml" class="md-nav__link">Tpx4 Yaml</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/1_usage/yaml_configuration.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="yaml-interface">
+<span id="id1"></span><h1 id="1-usage-yaml-configuration--page-root">Yaml Interface<a class="headerlink" href="#1-usage-yaml-configuration--page-root" title="Link to this heading">¶</a></h1>
+<p>Refer to the <a class="reference external" href="../_static/luna-v1.0.0.schema.json">Luna schema</a> for detailed definitions and constraints. You can also provide
+this schema to your text editor (like <a class="reference external" href="https://www.jetbrains.com/help/pycharm/json.html#ws_json_schema_add_custom">JetBrains IDE’s</a>) to get
+autocomplete and as-you-type validations.</p>
+<p>Once you have a yaml configuration you can pass it to <code class="docutils literal notranslate"><span class="pre">tpx3dump</span></code> or <code class="docutils literal notranslate"><span class="pre">tpx4dump</span></code> with the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> mode.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./tpx3dump<span class="w"> </span>yaml<span class="w"> </span>&lt;full/path/to/configuration.yaml
+</pre></div>
+</div>
+<details class="summary-luna-schema" name="yaml-configuration">
+<summary>Luna Schema</summary><ul class="simple">
+<li><p><strong>timepixSchemaVersion</strong> (string): The version of the schema this configuration complies with. Currently the only version is 1.0.0.</p></li>
+<li><p><strong>datasets</strong> (array): A collection of datasets.</p></li>
+</ul>
+<details class="summary-dataset" name="dataset-configuration">
+<summary>dataset</summary><blockquote>
+<div><ul>
+<li><p><strong>id</strong> (string): A unique identifier for the dataset, incorporating an abbreviation for the application type.</p></li>
+<li><p><strong>application</strong> (string): The application type of the dataset. Possible values: ‘MSI’, ‘VMI’, ‘INT’, ‘NEU’, ‘PIV’, ‘COS’, ‘TEM’, ‘OTH’.</p></li>
+<li><p><strong>detectorType</strong> (string): Detector type. Possible values: ‘Tpx3’, ‘Tpx4’.</p></li>
+<li><p><strong>inputFormat</strong> (string): The input format for Tpx4 detector type, constant across all configurations. Possible values: ‘ASI’, ‘NIKHEF’.</p></li>
+<li><p><strong>data</strong> (array): Configure input data paths for this analysis.</p>
+<details class="summary-data" name="data-configuration">
+<summary>data</summary><ul class="simple">
+<li><p><strong>id</strong> (string): The id for a data set. Should be unique.</p></li>
+<li><p><strong>name</strong> (string): The name of a dataset.</p></li>
+<li><p><strong>path</strong> (string): The path of the file or directory, relative to TimepixDataRoot root.</p></li>
+</ul>
+</details></li>
+<li><p><strong>analysis</strong> (array): Analysis configurations referencing the ‘Analysis Configuration’ definition.</p></li>
+</ul>
+</div></blockquote>
+<details class="custom-summary summary-analysis-configuration" name="analysis-configuration">
+<summary>Analysis Configuration</summary><p>This object defines the configuration for analysis.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): A unique identifier for the analysis configuration.</p></li>
+<li><p><strong>outputFile</strong> (string): Path for the output file.</p></li>
+<li><p><strong>layout</strong> (string): Either ‘single’ or ‘quad’. Default: ‘single’.</p></li>
+<li><p><strong>epsSpace</strong> (integer): Space gap for the centroiding algorithm in unit of pixels. Default: 1.</p></li>
+<li><p><strong>epsTime</strong> (string): Time gap for the centroiding algorithm with units (e.g., ‘500ns’). Valid units: s, ms, us, ns, ps, fs. Default: ‘100ns’.</p></li>
+<li><p><strong>disableClustering</strong> (boolean): Disable clustering functionality which is on by default. Default: false.</p></li>
+<li><p><strong>ctotCut</strong> (integer): The value of the cut used when computing the timewalk correction look up table. Must be increments of 25ns. Default: 1500.</p></li>
+<li><p><strong>timewalkFile</strong> (string): A path to a hdf5 file from a previous run of tpx3dump which contains the timewalk correction matrix.</p></li>
+<li><p><strong>timeBinInterval</strong> (string): The interval in units of time used to segment data for further processing after reading and unpacking. Default: ‘all’.</p></li>
+<li><p><strong>numTimeBins</strong> (integer): Number of time bins to use. Default: 5.</p></li>
+<li><p><strong>logLevel</strong> (string): Logging level [possible values: off, trace, debug, info, warn, error]. Default: ‘info’.</p></li>
+<li><p><strong>rawOnly</strong> (boolean): Flag to indicate processing data from binary to raw data only, no sorting or clustering. Default: false.</p></li>
+<li><p><strong>nPhases</strong> (integer): The value of the number of phases for the phase locked loop (PLL) used for acquisition. Default: 16.</p></li>
+<li><p><strong>inputFormat</strong> (string): (tpx4dump only) The input format for Tpx4 detector type. Possible values: ‘ASI’, ‘NIKHEF’.</p></li>
+<li><p><strong>maxDelay</strong> (number): (tpx4dump only). The maximum delay difference between arrival of the heartbeat and the hits, expressed as a portion of wraparound period. Must be less than 1.0. Default is 1/4 of the wraparound period.</p></li>
+<li><p><strong>discardPixelData</strong> (boolean): When true (default false), the PixelData is not output to hdf5.</p></li>
+<li><p><strong>tofTdcReference</strong> (string): The TDC to use as a reference when calculating the time of flight (ToF). Possible values: [‘TDC1Rising’, ‘TDC1Falling’, ‘TDC2Rising’, ‘TDC2Falling’, ‘’]. If not set (‘’), the ToF is ignored. Default: ‘’;</p></li>
+</ul>
+</details></details></details><section id="example-yaml-configurations">
+<h2 id="example-yaml-configurations">Example yaml configurations<a class="headerlink" href="#example-yaml-configurations" title="Link to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The environment variable <code class="docutils literal notranslate"><span class="pre">$(ASI_TEST_SUITE)</span></code> is used in these examples. This syntax allows you
+to define arbitrary environment variables and use them in paths.</p>
+</div>
+<section id="process-tpx3-data-from-raw-binary-to-real-valued-data">
+<h3 id="process-tpx3-data-from-raw-binary-to-real-valued-data">Process tpx3 data from raw binary to real valued data<a class="headerlink" href="#process-tpx3-data-from-raw-binary-to-real-valued-data" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">timepixSchemaVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0.0"</span>
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"ds1"</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Example</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">run</span><span class="nv"> </span><span class="s">tpx3dump</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">yaml</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">file."</span>
+<span class="w">    </span><span class="nt">detectorType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tpx3</span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.tpx3"</span>
+<span class="w">    </span><span class="nt">analysis</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis1"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="l l-Scalar l-Scalar-Plain">$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.h5"</span>
+<span class="w">        </span><span class="nt">epsT</span><span class="p">:</span><span class="w"> </span><span class="s">"150ns"</span>
+</pre></div>
+</div>
+</section>
+<section id="discard-pixelhit-data">
+<h3 id="discard-pixelhit-data">Discard PixelHit data<a class="headerlink" href="#discard-pixelhit-data" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">timepixSchemaVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0.0"</span>
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"ds1"</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Tpx4</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">yaml</span><span class="nv"> </span><span class="s">interface"</span>
+<span class="w">    </span><span class="nt">detectorType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tpx4</span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/M4I_TEM_additional_data/fDoS_000000.tpx4"</span>
+<span class="w">    </span><span class="nt">analysis</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis1"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/M4I_TEM_additional_data/fDoS_000000.h5"</span>
+<span class="w">        </span><span class="nt">epsTime</span><span class="p">:</span><span class="w"> </span><span class="s">"100ns"</span>
+<span class="w">        </span><span class="nt">inputFormat</span><span class="p">:</span><span class="w"> </span><span class="s">"asi"</span>
+<span class="w">        </span><span class="nt">discardPixelHits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-configurations">
+<h3 id="multiple-configurations">Multiple Configurations<a class="headerlink" href="#multiple-configurations" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">timepixSchemaVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0.0"</span>
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"ds1"</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Example</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">run</span><span class="nv"> </span><span class="s">tpx3dump,</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">dataset</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">multiple</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">configurations."</span>
+<span class="w">    </span><span class="nt">detectorType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tpx3</span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.tpx3"</span>
+<span class="w">    </span><span class="nt">analysis</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis1"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="l l-Scalar l-Scalar-Plain">$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis1.h5"</span>
+<span class="w">        </span><span class="nt">epsSpace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">        </span><span class="nt">epsTime</span><span class="p">:</span><span class="w"> </span><span class="s">"100ns"</span>
+<span class="w">        </span><span class="nt">timeBinInterval</span><span class="p">:</span><span class="w"> </span><span class="s">"1s"</span>
+<span class="w">        </span><span class="nt">numTimeBins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">        </span><span class="nt">rawOnly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">logLevel</span><span class="p">:</span><span class="w"> </span><span class="s">"info"</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis2"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="l l-Scalar l-Scalar-Plain">$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis2.h5"</span>
+<span class="w">        </span><span class="nt">epsSpace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">        </span><span class="nt">epsTime</span><span class="p">:</span><span class="w"> </span><span class="s">"100ns"</span>
+<span class="w">        </span><span class="nt">timeBinInterval</span><span class="p">:</span><span class="w"> </span><span class="s">"1s"</span>
+<span class="w">        </span><span class="nt">numTimeBins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">        </span><span class="nt">rawOnly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">logLevel</span><span class="p">:</span><span class="w"> </span><span class="s">"info"</span>
+</pre></div>
+</div>
+</section>
+<section id="yaml-anchors">
+<h3 id="yaml-anchors">Yaml Anchors<a class="headerlink" href="#yaml-anchors" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">common-analysis-config</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;common</span>
+<span class="w">  </span><span class="nt">epsSpace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">timeBinInterval</span><span class="p">:</span><span class="w"> </span><span class="s">"1s"</span>
+<span class="w">  </span><span class="nt">numTimeBins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">rawOnly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">logLevel</span><span class="p">:</span><span class="w"> </span><span class="s">"info"</span>
+
+<span class="nt">timepixSchemaVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0.0"</span>
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"ds1"</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Example</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">use</span><span class="nv"> </span><span class="s">yaml</span><span class="nv"> </span><span class="s">anchors</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">reuse</span><span class="nv"> </span><span class="s">configurations."</span>
+<span class="w">    </span><span class="nt">detectorType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tpx3</span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.tpx3"</span>
+<span class="w">    </span><span class="nt">analysis</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis1"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="l l-Scalar l-Scalar-Plain">$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis1.h5"</span>
+<span class="w">        </span><span class="nt">epsTime</span><span class="p">:</span><span class="w"> </span><span class="s">"100ns"</span>
+<span class="w">        </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*common</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis2"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="l l-Scalar l-Scalar-Plain">$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis2.h5"</span>
+<span class="w">        </span><span class="nt">epsTime</span><span class="p">:</span><span class="w"> </span><span class="s">"300ns"</span>
+<span class="w">        </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*common</span>
+</pre></div>
+</div>
+</section>
+<section id="tpx4-yaml">
+<h3 id="tpx4-yaml">Tpx4 Yaml<a class="headerlink" href="#tpx4-yaml" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">timepixSchemaVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0.0"</span>
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"ds1"</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Tpx4</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">yaml</span><span class="nv"> </span><span class="s">interface"</span>
+<span class="w">    </span><span class="nt">detectorType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tpx4</span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/M4I_TEM_additional_data/fDoS_000000.tpx4"</span>
+<span class="w">    </span><span class="nt">analysis</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"analysis1"</span>
+<span class="w">        </span><span class="nt">outputFile</span><span class="p">:</span><span class="w"> </span><span class="s">"$(ASI_TEST_SUITE)/M4I_TEM_additional_data/fDoS_000000.h5"</span>
+<span class="w">        </span><span class="nt">epsTime</span><span class="p">:</span><span class="w"> </span><span class="s">"100ns"</span>
+<span class="w">        </span><span class="nt">inputFormat</span><span class="p">:</span><span class="w"> </span><span class="s">"asi"</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="cli_configuration.html" title="Command Line Interface"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> Command Line Interface </span>
+              </div>
+            </a>
+          
+          
+            <a href="../2_concepts/concepts.html" title="Concepts"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> Concepts </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Ciaran Welsh.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

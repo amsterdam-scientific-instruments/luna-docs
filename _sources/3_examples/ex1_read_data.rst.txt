@@ -1,0 +1,33 @@
+Read Data
+=========
+
+This example demonstrates how to read the HDF5 output of Luna
+using `h5py` and `pandas`.
+
+.. _ex1_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex1_read_data_luna_command.txt
+   :language: bash
+
+.. _ex1_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex1_read_data.py
+   :language: python
+   :caption: Python code to read HDF5 data
+   :linenos:
+
+.. _ex1_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex1_read_data.txt
+   :language: python
+   :caption: Example Output
+

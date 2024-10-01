@@ -1,0 +1,17 @@
+Time Units in Luna
+===================
+
+
+Standard time units are chosen such that the smallest time increment corresponds to integer numbers. For example, since the time bin resolution of the Timepix3 ToA is 1.5625 ns, the units are chosen as 100 fs, making one bin in ToA equal to 15625 units. The table below shows the standard time unit used in the hdf5 output, along with the multiplication factor required to convert to seconds or nanoseconds.
+
++---------------+-------------------+-------------------------+-------------------------+
+|               | Standard time unit| Multiplication to       | Multiplication to       |
+|               |                   | seconds                 | nanoseconds             |
++===============+===================+=========================+=========================+
+| Timepix3 ToA  | 100 fs            | 10\ :sup:`-13`          | 10\ :sup:`-4`           |
++---------------+-------------------+-------------------------+-------------------------+
+| Timepix3 ToT  | 1 ns              | 10\ :sup:`-9`           | 1                       |
++---------------+-------------------+-------------------------+-------------------------+
+| Timepix4 ToA/ | 100 as            | 10\ :sup:`-16`          | 10\ :sup:`-7`           |
+| ToT           | (attosecond)      |                         |                         |
++---------------+-------------------+-------------------------+-------------------------+

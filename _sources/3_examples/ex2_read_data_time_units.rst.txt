@@ -1,0 +1,34 @@
+Read data, Unit Conversion
+==============================
+
+This example demonstrates how to read the HDF5 output of Luna
+using `h5py` and `pandas` and shows you how to convert the ToA time units
+to whatever you like.
+
+.. _ex2_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex2_read_data_time_units_luna_command.txt
+   :language: bash
+
+.. _ex2_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex2_read_data_time_units.py
+   :language: python
+   :caption: Python code to read HDF5 data and convert the units
+   :linenos:
+
+.. _ex2_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex2_read_data_time_units.txt
+   :language: python
+   :caption: Example Output
+

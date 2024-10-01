@@ -1,0 +1,40 @@
+Plot Pixel Data: Time Slice
+================================
+
+This example demonstrates how to read the HDF5 output of Luna
+using `h5py` and `pandas` and shows you how to convert the ToA time units
+to whatever you like.
+
+.. _ex5_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex5_plot_cluster_2d_histogram_luna_command.txt
+   :language: bash
+
+.. _ex5_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex5_plot_cluster_2d_histogram.py
+   :language: python
+   :caption: Plot a 2D histogram with cluster data
+   :linenos:
+
+.. _ex5_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex5_plot_cluster_2d_histogram.txt
+   :language: python
+   :caption: Example Output
+
+.. image:: ../_static/examples_output/plots/ex5_plot_cluster_2d_histogram_ctot.png
+   :align: center
+   :alt: 2D histogram of clusters
+   :width: 80%
+
+

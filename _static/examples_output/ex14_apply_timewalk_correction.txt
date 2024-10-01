@@ -1,0 +1,54 @@
+hdf5 datasets: ['Clusters', 'ExposureTimeBoundaries', 'PixelHits', 'TimewalkLookupTable', 'TimewalkMatrix']
+hdf5 datasets: ['Clusters', 'ExposureTimeBoundaries', 'PixelHits', 'TimewalkLookupTable', 'TimewalkMatrix']
+Plot saved to "/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/examples_output/plots/ex14_apply_timewalk_correction_toa_before_correction.png"
+Plot saved to "/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/examples_output/plots/ex14_apply_timewalk_correction_toa_after_correction.png"
+0      0.004095
+1      0.000000
+2      0.000000
+3      0.000000
+4      0.217935
+5      0.000000
+6      1.047299
+7      0.000000
+8      0.000000
+9      0.165562
+10     0.165562
+11     0.165562
+12    11.188034
+13     0.000000
+14     0.000000
+15     0.000000
+16     0.000000
+17     0.000000
+18     0.000000
+19     0.017495
+20     0.004095
+21     0.453426
+22     0.165562
+23     0.000000
+24     0.035683
+25     0.000000
+26     0.159905
+27     0.084773
+28     0.000000
+29     0.000000
+30     0.995096
+31     0.158259
+32     0.000000
+33     0.000000
+34     0.000000
+35     0.217935
+36     0.000000
+37     0.217935
+38     0.000000
+39     0.000000
+40     0.013170
+41     0.000000
+42     0.000000
+43     2.370532
+44     0.995096
+45     0.995096
+46     5.371407
+47     0.000000
+48     0.035683
+49     0.000000

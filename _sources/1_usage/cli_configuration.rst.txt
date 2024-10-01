@@ -1,0 +1,93 @@
+.. _cli:
+
+Command Line Interface
+==========================
+
+The command line interface is effectively the "AnalysisConfiguration" section of the :ref:`yaml-interface`
+which are given as command line arguments to the `tpx3dump` or `tpx4dump` executables.
+
+
+**Usage**
+---------
+
+To use ``tpx3dump``, specify a command followed by appropriate options:
+
+.. code-block:: bash
+
+    tpx3dump <COMMAND>
+
+**Commands**
+------------
+
+- **process**: Converts a ``*.tpx3`` file into an HDF5 file containing pixel hits and clusters.
+- **dry-run**: Reads in parameters but does not process data. Useful for generating a YAML configuration template for further customization.
+- **yaml**: Reads configuration from YAML.
+- **help**: Displays help information for ``tpx3dump`` or its subcommands.
+
+**Options**
+-----------
+
+- ``-h``, ``--help``: Displays help information about ``tpx3dump``.
+- ``-V``, ``--version``: Prints the version of the ``tpx3dump`` tool.
+
+**Examples**
+-------------
+
+Here are several usage examples demonstrating different functionalities of the ``tpx3dump`` tool:
+
+1. **Basic Conversion**:
+   Convert a TPX3 binary file to HDF5 using default settings:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./my_tpx3_data.tpx3 -o ./output.h5
+
+2. **Using File Lists**:
+   Process multiple files specified in a list:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./my_tpx3_data.tpx3,/my_tpx3_data.tpx3 -o ./output.h5
+
+3. **Using Glob Patterns**:
+   Process all TPX3 files in the current directory:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./*.tpx3 -o ./output.h5
+
+4. **Directory Input**:
+   Process all TPX3 files within a specified directory:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./result_directory -o ./output.h5
+
+5. **Adjusting Clustering Parameters**:
+   Customize clustering parameters during processing:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./data.tpx3 -o ./output.h5 --eps-t 500ns --eps-s 2 
+
+6. **Raw Conversion**:
+   Perform unpacking only, without sorting or clustering:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./*.tpx3 -o ./output.h5 --raw-only
+
+7. **Sorting without Clustering**:
+   Convert binary to HDF5 with sorting but no clustering:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./*.tpx3 -o ./output.h5 --disable-clustering
+
+8. **Time Binning**:
+   Change processing parameters to collect data in specified time bins:
+
+   .. code-block:: bash
+
+       tpx3dump process -i ./*.tpx3 -o ./output.h5 --time-bin-interval 1ms --num-time-bins 5
+

@@ -1,0 +1,63 @@
+Hdf5 Compression Investigation
+==============================
+
+One of the benefits of the yaml interface is the possibility for generating the yaml automatically. This
+was particularly useful when evaluating the compression algorithms that come with HDf5 and HDF5-rust. In this
+example we generate an exhaustive combination of compression options and visualize how they affect the
+processing time and the hdf5 compression.
+
+Given that there are so many combinations, it was practical to use a very small file for this investigation. The
+input tpx3 file was 1.1Mb. Below you can see the impact of each of the variables on the file size and processing
+performance.
+
+.. note::
+
+    The below data is representative of a very small raw data size (1.1Mb) due to the practicalities of so many luna
+    runs. You may base your decision on which algorithm and parameters to use on this data, but keep in mind that
+    at this time we do not know if the performance scales as we expect.
+
+    In short, it might be a good idea to use this script and find out for yourself which compression sets are right for
+    your data.
+
+.. _ex10_python_script:
+
+Python Script
+-------------
+:noindex:
+
+.. literalinclude:: ./python/ex10_hdf5_compression_investigation.py
+   :language: python
+   :caption: Automate generation of yaml file
+   :linenos:
+
+Compression Plots
+-----------------
+
+.. image:: ../_static/examples_output/plots/evaluation_compression_algorithms_compression_algorithm.png
+   :width: 80%
+   :align: center
+
+
+.. image:: ../_static/examples_output/plots/evaluation_compression_algorithms_compression_nthreads.png
+   :width: 80%
+   :align: center
+
+
+.. image:: ../_static/examples_output/plots/evaluation_compression_algorithms_compression_shuffle.png
+   :width: 80%
+   :align: center
+
+
+.. image:: ../_static/examples_output/plots/evaluation_compression_algorithms_hdf5_chunk_size.png
+   :width: 80%
+   :align: center
+
+.. _ex10_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex10_hdf5_compression_investigation.txt
+   :language: yaml
+   :caption: Combinatorially Built Yaml
+   :class: scrollable-output

@@ -1,0 +1,36 @@
+The Kuttruff Clustering Algorithm
+=================================
+
+Readers are referred to the section on clustering for a detailed description of the clustering algorithms.
+
+.. _ex13_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex13_kuttruff_clustering_algorithm_luna_command.txt
+   :language: bash
+
+.. _ex13_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex13_kuttruff_clustering_algorithm.py
+   :language: python
+   :caption: Using the Kuttruff clustering algorithm
+   :linenos:
+
+.. _ex13_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex13_kuttruff_clustering_algorithm.txt
+   :language: python
+   :caption: Example Output
+
+.. image:: ../_static/examples_output/plots/ex13_kuttruff_clustering_algorithm.png
+   :align: center
+   :alt: 2D histogram of clusters
+   :width: 80%

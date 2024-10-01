@@ -1,0 +1,24 @@
+*********
+Usage
+*********
+
+.. toctree::
+    :hidden:
+
+    cli_configuration
+    yaml_configuration
+
+Luna provides a flexible platform that can be interfaced through both a command-line interface (CLI) and a
+YAML configuration system.
+
+:ref:`yaml-interface` : Luna's YAML interface allows for defining detailed configurations in a clear,
+human-readable format. This interface is beneficial for setting up complex processes with multiple parameters,
+providing an easy way to manage, share, and version configurations. The YAML system simplifies the setup
+of extensive workflows and enhances readability and maintainability.
+
+:ref:`cli`: Luna's CLI is for users who prefer direct command execution,
+suitable for quickly generating some results. Users can execute Luna commands in the terminal,
+specifying configurations through command-line arguments.
+
+
+

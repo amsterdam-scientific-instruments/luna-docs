@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Clustering &#8212; luna 0.3.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6b2e5161" />
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/copytoclipboard.js?v=38cfd8db"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Timewalk Correction" href="timewalk.html" />
+    <link rel="prev" title="Time Binning" href="time_binning.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=orange data-md-color-accent=amber>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#2_concepts/clustering" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="luna 0.3.2 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">luna-logo.png</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Luna Documentation</span>
+          <span class="md-header-nav__topic"> Clustering </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">luna 0.3.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="concepts.html" class="md-tabs__link">Concepts</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="luna 0.3.2 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">luna-logo.png</i>
+      
+    </a>
+    <a href="../index.html"
+       title="luna 0.3.2 documentation">Luna Documentation</a>
+  </label>
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../index.html" class="md-nav__link">Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/usage.html" class="md-nav__link">Usage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/cli_configuration.html" class="md-nav__link">Command Line Interface</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/yaml_configuration.html" class="md-nav__link">Yaml Interface</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="concepts.html" class="md-nav__link">Concepts</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="time_units.html" class="md-nav__link">Time Units in Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="time_binning.html" class="md-nav__link">Time Binning</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Clustering </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Clustering</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#2-concepts-clustering--page-root" class="md-nav__link">Clustering</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#dfs-cluster-overview" class="md-nav__link">DFS Cluster Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#kuttruff2024-clustering" class="md-nav__link">Kuttruff2024 Clustering</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/2_concepts/clustering.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="timewalk.html" class="md-nav__link">Timewalk Correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="time_of_flight.html" class="md-nav__link">Time-of-Flight (ToF)</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/examples.html" class="md-nav__link">Examples</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex1_read_data.html" class="md-nav__link">Read Data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex2_read_data_time_units.html" class="md-nav__link">Read data, Unit Conversion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex3_plot_pixel_2d_histogram.html" class="md-nav__link">Plot Pixel Data: 2D Histogram</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex4_plot_pixel_2d_histogram_time_slice.html" class="md-nav__link">Plot Pixel Data: 2D Histogram Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex5_plot_cluster_2d_histogram.html" class="md-nav__link">Plot Pixel Data: Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex6_plot_distributions.html" class="md-nav__link">Plotting Distributions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex7_correct_toa_for_timewalk.html" class="md-nav__link">Time-walk Correction: Apply</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex8_timewalk_matrix.html" class="md-nav__link">Time-walk Correction: Matrix</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex9_timewalk_lut_construction.html" class="md-nav__link">Time-walk Correction: Constructing LUT</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex10_hdf5_compression_investigation.html" class="md-nav__link">Hdf5 Compression Investigation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex11_raw_only_analysis.html" class="md-nav__link">Raw only Analysis</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex12_disable_clustering.html" class="md-nav__link">Disable Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex13_kuttruff_clustering_algorithm.html" class="md-nav__link">The Kuttruff Clustering Algorithm</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex14_apply_timewalk_correction.html" class="md-nav__link">Apply the timewalk correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex15_accumulate_timewalk_statistics.html" class="md-nav__link">Accumulate timewalk statistics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex16_plot_tof.html" class="md-nav__link">Plot ToF</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#2-concepts-clustering--page-root" class="md-nav__link">Clustering</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#dfs-cluster-overview" class="md-nav__link">DFS Cluster Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#kuttruff2024-clustering" class="md-nav__link">Kuttruff2024 Clustering</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/2_concepts/clustering.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="clustering">
+<h1 id="2-concepts-clustering--page-root">Clustering<a class="headerlink" href="#2-concepts-clustering--page-root" title="Link to this heading">¶</a></h1>
+<p>The raw pixel head data contains some redundancies since a single particle hitting the detector register many times over
+causing many pixel hits. We can cluster these pixel heads, which essentially means grouping them into collections of
+pixels that we think came from a single event, or particle hitting the sensor.</p>
+<p>How do you determine whether a collection of pixel hits actually belong to the same event? Well, if two pixel
+hits are close enough in time and space then they belong to the same event. This concept is more easily understood
+with a graphic.</p>
+<a class="reference internal image-reference" href="../_images/first100_clusters_dfscluster.png"><img alt="First 100 clusters from a dataset coloured by their cluster ID and clustered with the DFSCluster algorithm. Parameters (``eps-t=100ns``, ``eps-s=1``)" class="align-center" src="../_images/first100_clusters_dfscluster.png" style="width: 1480.0px; height: 815.0px;"/></a>
+<p>In Luna, we have two clustering algorithms and they are described below.</p>
+<section id="dfs-cluster-overview">
+<h2 id="dfs-cluster-overview">DFS Cluster Overview<a class="headerlink" href="#dfs-cluster-overview" title="Link to this heading">¶</a></h2>
+<p>The <cite>DFSCluster</cite> struct is responsible for clustering and centroiding pixel hits. It leverages
+depth-first search (DFS) to identify clusters based on spatial (<cite>eps_s</cite>) and temporal (<cite>eps_t</cite>)
+proximity. Although the clustering algorithm draws on concepts from graph traversal, no explicit
+graph structure is constructed. Instead, connections between pixel hits are implied based on their
+proximity, allowing DFS to be used effectively. Additionally, the pixel hit data is pre-sorted by
+time, which optimizes the clustering process by reducing unnecessary comparisons.</p>
+<p>The clustering algorithm in <cite>DFSCluster</cite> is designed to identify and group pixel hits that are
+spatially and temporally close to each other. The relationships between pixel hits form an implicit
+graph where edges exist between nodes (pixels) that satisfy the spatial and temporal constraints,
+enabling DFS to traverse and cluster the hits. The pre-sorted nature of the pixel hit data by time
+allows the algorithm to skip comparisons that would otherwise be redundant, significantly enhancing
+efficiency.</p>
+<p>The process can be summarized as follows:</p>
+<ol class="arabic simple">
+<li><p><strong>Initialization:</strong>
+- The algorithm begins by setting parameters such as <cite>eps_s</cite> (spatial gap), <cite>eps_t</cite> (temporal gap), and timewalk correction options.
+- A queue (<cite>data_queue</cite>) is prepared to hold incoming chunks of pixel hits to be processed.</p></li>
+<li><p><strong>Enqueuing Data:</strong>
+- Pixel hits are added to the processing queue. The algorithm updates the <cite>already_processed_hits</cite> vector to track which hits have already been clustered.</p></li>
+<li><p><strong>Processing Chunks:</strong>
+- Each chunk of pixel hits is processed individually by the <cite>process_chunk</cite> method, which attempts to form clusters starting from unprocessed hits.</p></li>
+<li><p><strong>Depth-First Search (DFS) for Clustering:</strong>
+- The <cite>find_cluster</cite> method is the core of the clustering process. Starting from an unprocessed hit, DFS is used to explore all neighboring hits within the specified spatial and temporal distances (<cite>eps_s</cite> and <cite>eps_t</cite>).
+- Each pixel hit is treated as a node, with an implicit edge formed between nodes if they are within the defined proximity limits. DFS continues until all connected hits are explored, forming a cluster.
+- Because the pixel hits are pre-sorted by time, the algorithm can cease further comparisons once it encounters a hit that exceeds the temporal distance (<cite>eps_t</cite>), reducing the number of operations required to form clusters.</p></li>
+<li><p><strong>Cluster Validation:</strong>
+- After DFS completes for a starting hit, the algorithm checks the size of the formed cluster. Clusters that do not meet the <cite>min_cluster_size</cite> or exceed the <cite>max_cluster_size</cite> are discarded.
+- For valid clusters, timewalk correction is applied if enabled.</p></li>
+<li><p><strong>Merging Clusters:</strong>
+- After processing all chunks, the algorithm merges clusters that are close enough across chunk boundaries to prevent artificial splitting of clusters.</p></li>
+<li><p><strong>Finalization:</strong>
+- The resulting clusters are stored in the <cite>clusters</cite> container, ready for further processing or analysis.</p></li>
+</ol>
+</section>
+<section id="kuttruff2024-clustering">
+<h2 id="kuttruff2024-clustering">Kuttruff2024 Clustering<a class="headerlink" href="#kuttruff2024-clustering" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://doi.org/10.1016/j.ultramic.2023.113864">The Kuttruff2024 algorithm</a> is much newer than the
+DFSCluster algorithm. As such, it is still considered an experimental implementation. Readers are invited to read
+their paper directly to understand how it works.</p>
+<p>The <cite>Kuttruff2024Clustering</cite> algorithm implements a high-performance, real-time clustering algorithm
+specifically designed for event-driven hybrid pixel detectors. This algorithm is engineered to
+efficiently process high-frequency data streams, such as those produced by advanced electron
+detectors, enabling the continuous and seamless processing of incoming pixel hits without any
+operational interruptions. The algorithm leverages both spatial (<cite>eps_s</cite>) and temporal (<cite>eps_t</cite>)
+proximity criteria to dynamically group hits into clusters, ensuring that the computational workload
+remains efficient and manageable, even under high data rates.</p>
+<p>The <cite>Kuttruff2024Clustering</cite> algorithm is structured around the concept of continuous data processing,
+where each incoming pixel hit is evaluated and clustered in real-time. A central feature of the algorithm
+is its use of a small, fixed-size buffer of recently detected clusters. This buffer allows the algorithm
+to limit the scope of comparisons, making the process highly scalable as data rates increase. The fixed
+buffer strategy, combined with the temporal sorting of pixel hits, significantly reduces computational
+overhead and ensures that the algorithm can operate at the maximum data rates supported by modern
+detectors.</p>
+<p>Unlike the <cite>DFSCluster</cite> algorithm, which checks for pixels within an <cite>eps_s</cite> distance from every pixel
+already in the cluster and gradually expands the cluster by including these neighboring pixels, the
+<cite>Kuttruff2024Clustering</cite> algorithm performs the spatial check relative to the current position of the
+cluster being formed. This subtle difference in approach means that the <cite>eps_s</cite> parameter represents
+slightly different concepts in the two algorithms. In practical terms, <cite>eps_s</cite> in <cite>Kuttruff2024Clustering</cite>
+defines the region around the centroid of the forming cluster within which new hits are considered for
+inclusion. As demonstrated in the referenced paper (Fig. 4a), the region of convergence for the distance
+parameter is &gt;5 pixels. In Luna development, we often used <cite>eps_s = 6</cite> to reflect this convergence region.</p>
+<p>The key steps of the process are as follows:</p>
+<ol class="arabic simple">
+<li><p><strong>Initialization:</strong>
+- The algorithm is initialized with key parameters: <cite>eps_t</cite> (temporal gap), <cite>eps_s</cite> (spatial gap), and <cite>b</cite> (buffer size), which define the clustering criteria and the size of the fixed history buffer used for comparisons.
+- Two main data structures are used: <cite>data_queue</cite>, which stores incoming chunks of pixel hits, and <cite>processed_data</cite>, which holds the chunks that have already been processed.</p></li>
+<li><p><strong>Data Enqueuing:</strong>
+- Incoming pixel hits are continuously added to the <cite>data_queue</cite> for processing. As new hits arrive, they are temporarily stored in the queue until they can be processed.
+- The algorithm maintains a buffer of recently processed clusters, which is used to compare against new hits. This buffer is crucial for maintaining efficiency, as it limits the number of comparisons needed for each new hit.</p></li>
+<li><p><strong>Chunk Processing:</strong>
+- The algorithm processes each chunk of pixel hits individually. During this step, each hit within the chunk is evaluated to determine whether it can be merged into any of the existing clusters in the buffer based on the spatial (<cite>eps_s</cite>) and temporal (<cite>eps_t</cite>) proximity criteria.
+- If a hit is sufficiently close to the current position of an existing cluster in both space and time, it is merged into that cluster. If no suitable cluster is found, the algorithm initializes a new cluster, and the oldest cluster in the buffer is removed to make room for new data.</p></li>
+<li><p><strong>Fixed-Size Cluster Buffer:</strong>
+- The buffer size is kept fixed, meaning that the algorithm maintains a constant number of recent clusters in memory. This design choice ensures that the computational load remains predictable and manageable, even as data rates fluctuate.
+- If a hit does not match any existing cluster in the buffer, a new cluster is created, and the oldest cluster is outputted for further analysis or storage. This approach ensures that the algorithm remains efficient even at high data rates, but the fixed buffer size also means that older clusters may be prematurely discarded if the buffer limit is reached.</p></li>
+<li><p><strong>Finalization:</strong>
+- Once processing is complete, the resulting clusters are stored in the <cite>clusters</cite> container, which can then be used for further analysis, storage, or downstream processing. The algorithm is designed to handle the maximum data rates of modern detectors without creating bottlenecks, ensuring real-time data processing.</p></li>
+</ol>
+<p>Finally, while the algorithm is new and therefore untested by time you can see that the algorithm performs similarly
+to the DFSCluster algorithm <span class="xref std std-ref">_clustering-first100hits-kuttruff</span>.</p>
+<a class="reference internal image-reference" href="../_images/first100_clusters_kuttruff.png" id="clustering-first100hits-kuttruff"><img alt="First 100 clusters from a dataset coloured by their cluster ID and clustered with the Kuttruff2024 clustering algorithm (``eps-t=100ns``, ``eps-s=6``, ``kuttruff_buffer_size=10``) ." class="align-center" id="clustering-first100hits-kuttruff" src="../_images/first100_clusters_kuttruff.png" style="width: 1480.0px; height: 815.0px;"/></a>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="time_binning.html" title="Time Binning"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> Time Binning </span>
+              </div>
+            </a>
+          
+          
+            <a href="timewalk.html" title="Timewalk Correction"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> Timewalk Correction </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Ciaran Welsh.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

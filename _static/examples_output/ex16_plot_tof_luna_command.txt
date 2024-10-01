@@ -1,0 +1,1 @@
+./tpx3dump process --input-files /Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data_with_tdc.tpx3 --output-file /Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data_with_tdc.h5 --tof-tdc-reference TDC2Rising

@@ -1,0 +1,24 @@
+common-analysis-config: &common
+  epsSpace: 1
+  timeBinInterval: "1s"
+  numTimeBins: 5
+  rawOnly: false
+  logLevel: "info"
+
+timepixSchemaVersion: "1.0.0"
+datasets:
+  - id: "ds1"
+    description: "Example of how you can use yaml anchors to reuse configurations."
+    detectorType: Tpx3
+    data:
+      - path: "$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.tpx3"
+    analysis:
+      - id: "analysis1"
+        outputFile: ""$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis1.h5"
+        epsTime: "100ns"
+        <<: *common
+
+      - id: "analysis2"
+        outputFile: ""$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis2.h5"
+        epsTime: "300ns"
+        <<: *common

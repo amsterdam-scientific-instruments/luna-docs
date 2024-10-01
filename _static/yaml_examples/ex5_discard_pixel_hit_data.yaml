@@ -1,0 +1,13 @@
+timepixSchemaVersion: "1.0.0"
+datasets:
+  - id: "ds1"
+    description: "Tpx4 configuration using the yaml interface"
+    detectorType: Tpx4
+    data:
+      - path: "$(ASI_TEST_SUITE)/M4I_TEM_additional_data/fDoS_000000.tpx4"
+    analysis:
+      - id: "analysis1"
+        outputFile: "$(ASI_TEST_SUITE)/M4I_TEM_additional_data/fDoS_000000.h5"
+        epsTime: "100ns"
+        inputFormat: "asi"
+        discardPixelHits: true

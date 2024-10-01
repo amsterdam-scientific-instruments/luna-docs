@@ -1,0 +1,35 @@
+Examples
+========
+
+This section provides practical, hands-on examples using Python to read back data processed by Luna and apply the next analysis steps, such as basic data inspection, making plots or reviewing the timewalk correction.
+Each example starts with the Luna command used to process the raw .tpx3 file into an .hdf5 file. 
+Then, a Python script is used to read back the data.
+
+
+.. rubric:: Example Dataset
+
+To start working with these examples, a raw .txp3 data file is required. 
+An example dataset can be downloaded here: :download:`example_dataset.tpx3 <../_static/example_data.tpx3>`.
+
+..  toctree::
+    :hidden:
+    :caption: Examples
+
+    ex1_read_data
+    ex2_read_data_time_units
+    ex3_plot_pixel_2d_histogram
+    ex4_plot_pixel_2d_histogram_time_slice
+    ex5_plot_cluster_2d_histogram
+    ex6_plot_distributions
+    ex7_correct_toa_for_timewalk
+    ex8_timewalk_matrix
+    ex9_timewalk_lut_construction
+    ex10_hdf5_compression_investigation
+    ex11_raw_only_analysis
+    ex12_disable_clustering
+    ex13_kuttruff_clustering_algorithm
+    ex14_apply_timewalk_correction
+    ex15_accumulate_timewalk_statistics
+    ex16_plot_tof
+
+

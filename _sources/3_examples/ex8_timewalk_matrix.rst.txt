@@ -1,0 +1,49 @@
+Time-walk Correction: Matrix
+============================
+
+The timewalk matrix gives important insight into your data. More specifically
+it shows you where to put the cToT cut parameter. The timewalk lookup table is
+an average of this matrix, "cut" at a particular cToT point. That is,
+values lower than this are discarded and values higher are averaged and used
+to construct the lookup table.
+
+.. _ex9_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex8_timewalk_matrix_luna_command.txt
+   :language: bash
+
+.. _ex8_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex8_timewalk_matrix.py
+   :language: python
+   :caption: Plot the timewalk matrix
+   :linenos:
+
+.. _ex8_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex8_timewalk_matrix.txt
+   :language: python
+   :caption: Example Output
+
+.. container:: figure-grid
+
+    .. figure:: ../_static/examples_output/plots/ex8_timewalk_matrix_heatmap_2000.png
+       :align: left
+
+    .. figure:: ../_static/examples_output/plots/ex8_timewalk_matrix_heatmap_1500.png
+       :align: right
+
+    .. figure:: ../_static/examples_output/plots/ex8_timewalk_matrix_heatmap_1000.png
+       :align: left
+
+    .. figure:: ../_static/examples_output/plots/ex8_timewalk_matrix_heatmap_500.png
+       :align: right

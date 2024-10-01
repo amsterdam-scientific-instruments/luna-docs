@@ -1,0 +1,56 @@
+Disable Clustering
+==================
+
+If it is not needed, you can disable clustering entirely. Clustering is generally the most
+performance intensive part of processing and if its not needed then you do not need to wait.
+
+.. _ex12_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex12_disable_clustering_luna_command.txt
+   :language: bash
+
+.. _ex12_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex12_disable_clustering.py
+   :language: python
+   :caption: Disable clustering
+   :linenos:
+
+.. _ex12_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex12_disable_clustering.txt
+   :language: python
+   :caption: Example Output
+
+
+
+.. raw:: html
+
+   <table>
+     <tr>
+       <td style="text-align: center;">
+         <img src="../_static/examples_output/plots/ex12_toa_0-50.png" alt="2D histogram of clusters" style="width: 100%;" />
+       </td>
+       <td style="text-align: center;">
+         <img src="../_static/examples_output/plots/ex12_toa_0-500.png" alt="2D histogram of clusters" style="width: 100%;" />
+       </td>
+     </tr>
+     <tr>
+       <td style="text-align: center;">
+         <img src="../_static/examples_output/plots/ex12_toa_0-5000.png" alt="2D histogram of clusters" style="width: 100%;" />
+       </td>
+       <td style="text-align: center;">
+         <img src="../_static/examples_output/plots/ex12_toa_0-50000.png" alt="2D histogram of clusters" style="width: 100%;" />
+       </td>
+     </tr>
+   </table>
+

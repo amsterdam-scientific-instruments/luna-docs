@@ -1,0 +1,24 @@
+timepixSchemaVersion: "1.0.0"
+datasets:
+  - id: "ds1"
+    description: "Example of how to run tpx3dump, one dataset with multiple analysis configurations."
+    detectorType: Tpx3
+    data:
+      - path: "$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500.tpx3"
+    analysis:
+      - id: "analysis1"
+        outputFile: ""$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis1.h5"
+        epsSpace: 1
+        epsTime: "100ns"
+        timeBinInterval: "1s"
+        numTimeBins: 5
+        rawOnly: false
+        logLevel: "info"
+      - id: "analysis2"
+        outputFile: ""$(ASI_TEST_SUITE)/Tpx3/00_MSI/00_peptide_mix/500_analysis2.h5"
+        epsSpace: 1
+        epsTime: "100ns"
+        timeBinInterval: "1s"
+        numTimeBins: 5
+        rawOnly: false
+        logLevel: "info"

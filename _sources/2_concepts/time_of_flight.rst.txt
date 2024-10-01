@@ -1,0 +1,41 @@
+Time-of-Flight (ToF)
+=====================
+
+The Time-of-Flight (ToF) module is designed to calculate the time delay between when a particle is detected by a pixel in the detector and a reference time signal provided by one of the Time-to-Digital Converters (TDCs). 
+
+Key Features
+------------
+
+- **Automatic Time Calculations**: Automatically computes the time-of-flight for each detected pixel hit relative to a selected reference signal.
+- **Multiple Reference Options**: Offers support for different Time-to-Digital Converter (TDC) references, allowing flexibility in experimental setups.
+- **Easy Configuration**: The ToF feature can be activated with a single configuration setting, simplifying the setup process.
+
+Algorithm Overview
+------------------
+
+The ToF module calculates the time delay for detected events through the following steps:
+
+1. **Reference Selection**: The user selects a TDC reference via the Command Line Interface (CLI) or the YAML configuration file. This reference provides the baseline time from which all ToF calculations will be derived.
+
+2. **Timestamp Sorting**: Luna reads the timestamp for each detected signal event (pixel hit) and reference event (TDC). These events are sorted into a single queue based on their timestamps to ensure correct chronological order.
+
+3. **ToF Calculation**: The ToF for each pixel hit is calculated using the selected reference time. The algorithm processes the queue as follows:
+
+   - **Pixel Hit Event**: If the event is a pixel hit, the ToF is computed using the current reference time. The ToF is given by:
+
+     .. math::
+        \text{ToF} = \text{ToA}_{\text{Pixel}} - \text{TDC}_{\text{Reference}}
+
+     where:
+     
+     - :math:`\text{ToA}_{\text{Pixel}}` is the Time of Arrival (ToA) of the pixel hit.
+     - :math:`\text{TDC}_{\text{Reference}}` is the timestamp from the current TDC reference event.
+
+   - **TDC Event**: If the event is a TDC event, the current reference time is updated. All subsequent pixel hits will use this new reference time for their ToF calculation.
+
+Performance
+-----------
+
+The ToF module is designed to operate efficiently with minimal impact on overall system performance. 
+It processes timing data **without** applying timewalk corrections. 
+

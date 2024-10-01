@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Timewalk Correction &#8212; luna 0.3.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6b2e5161" />
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/copytoclipboard.js?v=38cfd8db"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Time-of-Flight (ToF)" href="time_of_flight.html" />
+    <link rel="prev" title="Clustering" href="clustering.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=orange data-md-color-accent=amber>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#2_concepts/timewalk" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="luna 0.3.2 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">luna-logo.png</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Luna Documentation</span>
+          <span class="md-header-nav__topic"> Timewalk Correction </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">luna 0.3.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="concepts.html" class="md-tabs__link">Concepts</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="luna 0.3.2 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">luna-logo.png</i>
+      
+    </a>
+    <a href="../index.html"
+       title="luna 0.3.2 documentation">Luna Documentation</a>
+  </label>
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../index.html" class="md-nav__link">Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/usage.html" class="md-nav__link">Usage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/cli_configuration.html" class="md-nav__link">Command Line Interface</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/yaml_configuration.html" class="md-nav__link">Yaml Interface</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="concepts.html" class="md-nav__link">Concepts</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="time_units.html" class="md-nav__link">Time Units in Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="time_binning.html" class="md-nav__link">Time Binning</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="clustering.html" class="md-nav__link">Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Timewalk Correction </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Timewalk Correction</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#2-concepts-timewalk--page-root" class="md-nav__link">Timewalk Correction</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#timewalk-correction-in-luna" class="md-nav__link">Timewalk Correction in Luna</a>
+        </li>
+        <li class="md-nav__item"><a href="#conclusion" class="md-nav__link">Conclusion</a>
+        </li>
+        <li class="md-nav__item"><a href="#acknowledgements" class="md-nav__link">Acknowledgements</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/2_concepts/timewalk.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="time_of_flight.html" class="md-nav__link">Time-of-Flight (ToF)</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/examples.html" class="md-nav__link">Examples</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex1_read_data.html" class="md-nav__link">Read Data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex2_read_data_time_units.html" class="md-nav__link">Read data, Unit Conversion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex3_plot_pixel_2d_histogram.html" class="md-nav__link">Plot Pixel Data: 2D Histogram</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex4_plot_pixel_2d_histogram_time_slice.html" class="md-nav__link">Plot Pixel Data: 2D Histogram Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex5_plot_cluster_2d_histogram.html" class="md-nav__link">Plot Pixel Data: Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex6_plot_distributions.html" class="md-nav__link">Plotting Distributions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex7_correct_toa_for_timewalk.html" class="md-nav__link">Time-walk Correction: Apply</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex8_timewalk_matrix.html" class="md-nav__link">Time-walk Correction: Matrix</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex9_timewalk_lut_construction.html" class="md-nav__link">Time-walk Correction: Constructing LUT</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex10_hdf5_compression_investigation.html" class="md-nav__link">Hdf5 Compression Investigation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex11_raw_only_analysis.html" class="md-nav__link">Raw only Analysis</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex12_disable_clustering.html" class="md-nav__link">Disable Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex13_kuttruff_clustering_algorithm.html" class="md-nav__link">The Kuttruff Clustering Algorithm</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex14_apply_timewalk_correction.html" class="md-nav__link">Apply the timewalk correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex15_accumulate_timewalk_statistics.html" class="md-nav__link">Accumulate timewalk statistics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../3_examples/ex16_plot_tof.html" class="md-nav__link">Plot ToF</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#2-concepts-timewalk--page-root" class="md-nav__link">Timewalk Correction</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#timewalk-correction-in-luna" class="md-nav__link">Timewalk Correction in Luna</a>
+        </li>
+        <li class="md-nav__item"><a href="#conclusion" class="md-nav__link">Conclusion</a>
+        </li>
+        <li class="md-nav__item"><a href="#acknowledgements" class="md-nav__link">Acknowledgements</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/2_concepts/timewalk.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="timewalk-correction">
+<h1 id="2-concepts-timewalk--page-root">Timewalk Correction<a class="headerlink" href="#2-concepts-timewalk--page-root" title="Link to this heading">¶</a></h1>
+<p><strong>Timewalk</strong> is a phenomenon observed in pixel detectors, such as the Timepix3 detector, where events with higher
+energy appear to arrive earlier than events with lower energy. This occurs because the Time Over Threshold (ToT)
+of a signal is inversely related to its time of arrival (ToA). A constant threshold is set, and signals with
+larger ToT have a steeper gradient, leading to a perceived earlier arrival time (see <a class="reference internal" href="#fig-timewalk-effect-thresholding">fig-timewalk-effect-thresholding</a>).
+This phenomenon is known as <strong>timewalk</strong>.</p>
+<figure class="align-left" id="id1">
+<span id="fig-timewalk-effect-thresholding"></span><a class="reference internal image-reference" href="../_images/timewalk_illustration_thresholding.png"><img alt="Illustration of timewalk effect" src="../_images/timewalk_illustration_thresholding.png" style="width: 45%;"/></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1</strong>: Illustration of the timewalk effect, where signals with higher ToT values appear to arrive earlier than those with lower ToT values, despite actually occurring simultaneously. All events arrive at <code class="docutils literal notranslate"><span class="pre">p0</span></code> and yet the moment at which the signal crosses the threshold is earlier for signals with larger energy (higher peak, steeper curve).</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>In experimental setups, a more precise correction for timewalk is typically achieved using
+test pulses to circumvent the discriminator (constant threshold) and get a true ToA. Then at a known (but short)
+time interval later the pixel matrix is stimulated. This process is repeated with varying energies to accumulate
+data that can inform a calibration curve which is then used to provide a correction factor, which is subtracted
+from the ToA. Readers are referred to Pitters et al. (2019) (DOI: <a class="reference external" href="https://doi.org/10.1088/1748-0221/14/05/P05022">10.1088/1748-0221/14/05/P05022</a>) for a more detailed discussion on experimental
+pixel by pixel timewalk correction. However, this method requires detailed experimental setup and calibration.</p>
+<figure class="align-left" id="id2">
+<span id="fig-timewalk-effect-within-cluster"></span><a class="reference internal image-reference" href="../_images/timewalk_illustration_cluster.png"><img alt="Heatmaps showing timewalk effect" src="../_images/timewalk_illustration_cluster.png" style="width: 100%;"/></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 2</strong>: Heatmaps showing the the timewalk effect within a single cluster. Where the Time over Threshold (ToT) is large the dToA is small and vice versa.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Luna offers an alternative, statistical method for correcting timewalk effects without the need for such
+detailed experimental calibration. Instead of using test pulses, Luna estimates the “true” time of arrival (ToA)
+using cluster data, which provides an approximation of true ToA (<a class="reference internal" href="#fig-timewalk-effect-within-cluster">fig-timewalk-effect-within-cluster</a>). Although this
+statistical method is less precise than the experimental approach and does not correct for pixel-by-pixel
+variations—opting instead to average these variations across pixels—it still offers a significant
+improvement in accuracy compared to the uncorrected ToA. Over large enough sample sizes, the statistical
+method is expected to converge towards greater accuracy.</p>
+<section id="timewalk-correction-in-luna">
+<h2 id="timewalk-correction-in-luna">Timewalk Correction in Luna<a class="headerlink" href="#timewalk-correction-in-luna" title="Link to this heading">¶</a></h2>
+<p>Luna’s approach to correcting timewalk is based on a statistical method that utilizes cluster data
+instead of test pulses to estimate the true time of arrival. The algorithm can be described through
+the following steps, both in words and using mathematical notation:</p>
+<ol class="arabic">
+<li><dl>
+<dt><strong>Cluster Time of Arrival (cToA) Estimation</strong>:</dt><dd><p>The time of arrival for a cluster (cToA) is estimated as the time of arrival of the pixel with the
+maximum energy (cToT) within the cluster.</p>
+<div class="math notranslate nohighlight">
+\[t_{\text{cToA}} = t_{\text{ToA}}( \text{argmax}( \text{ToT}))\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[t_{\text{ToA}}( \text{argmax}( \text{ToT}))\]</div>
+<p>represents the time of arrival of the pixel with the maximum ToT within the cluster.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Delta Time of Arrival (dToA) Calculation</strong>:</dt><dd><p>For each pixel in the cluster, the Delta (difference in) Time of Arrival (dToA) is calculated relative
+to the cToA. This is expressed as:</p>
+<div class="math notranslate nohighlight">
+\[\Delta t_{\text{dToA}} = t_{\text{ToA}} - t_{\text{cToA}}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Timewalk Matrix Construction</strong>:</dt><dd><p>The dToAs are grouped into a two-dimensional matrix based on their ToT and the cluster’s cToT.
+This matrix, known as the <strong>Timewalk Matrix</strong>, is used to analyze the timewalk effect across
+different energy levels. The matrix is constructed by averaging the dToAs within each bin,
+defined by the pixel’s ToT and the cluster’s cToT:</p>
+<div class="math notranslate nohighlight">
+\[M(i, j) = \frac{1}{N(i, j)} \sum_{\text{hits}} \Delta t_{\text{dToA}}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\begin{align*}
+    M(i, j) &amp; = \text{is the matrix entry for ToT bin i and cToT bin j} \\
+    N(i, j) &amp; = \text{is the number of hits in that bin}
+\end{align*}</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In luna output the <code class="docutils literal notranslate"><span class="pre">Timewalk</span> <span class="pre">Matrix</span></code> is in Long form, where each row represents
+a (cToT, ToT) pair. Rows which are empty (i.e. no cToT/ToT intersection) are removed
+before writing to disc.</p>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Lookup Table Generation</strong>:</dt><dd><p>The Timewalk Matrix is used to generate a lookup table of correction factors, which are then applied to correct the time of arrival (ToA) of pixel hits. This process involves the following steps:</p>
+<ul class="simple">
+<li><p>Plotting a heatmap of the Timewalk Matrix with cluster ToT values on the X-axis and pixel ToT values on the Y-axis.</p></li>
+<li><p>Determining a <strong>cToT cut</strong> by analyzing the heatmap to identify where further increases in cToT result in minimal changes to the timewalk correction.</p></li>
+<li><p>Discarding data below the cToT cut, and averaging the remaining data to determine the correction factor for all cToT values higher than the cut. This correction factor, denoted as $L(j)$, is calculated by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[L(j) = \frac{1}{|J|} \sum_{i \in J} M(i, j)\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+     L(j) &amp;= \text{the lookup table entry for pixel ToT bin j}\\
+     J    &amp;= \text{the set of bins above the cToT cut}
+\end{align*}\end{split}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Timewalk Correction</strong></dt><dd><p>The correction factor $L(j)$ is then subtracted from each pixel’s time of arrival to correct for timewalk effects:</p>
+<div class="math notranslate nohighlight">
+\[t_{\text{corrected}} = t_{\text{ToA}} - L(j)\]</div>
+</dd>
+</dl>
+<p>Here,</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    t_{\text{corrected}} &amp;= \text{the corrected time of arrival} \\
+    t_{\text{ToA}} &amp;= \text{the original time of arrival}\\
+    L(j) &amp;= \text{the lookup table correction factor corresponding to the pixel's ToT}
+\end{align*}\end{split}\]</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="conclusion">
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>Luna’s timewalk correction offers a practical and scalable method for mitigating timewalk effects
+in pixel detectors like the Timepix3. By using statistical analysis of cluster data, Luna
+provides a way to correct for timewalk without the need for extensive experimental calibration,
+making it suitable for a wide range of applications in high-energy physics and other fields
+where timewalk is a concern.</p>
+</section>
+<section id="acknowledgements">
+<h2 id="acknowledgements">Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">¶</a></h2>
+<p>We thank Dr. Peter Svihra for sharing his method of timewalk correction with us to implement in Luna.</p>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="clustering.html" title="Clustering"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> Clustering </span>
+              </div>
+            </a>
+          
+          
+            <a href="time_of_flight.html" title="Time-of-Flight (ToF)"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> Time-of-Flight (ToF) </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Ciaran Welsh.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

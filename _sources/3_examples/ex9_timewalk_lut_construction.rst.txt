@@ -1,0 +1,49 @@
+Time-walk Correction: Constructing LUT
+======================================
+
+While luna does this for you when you choose the ctot-cut parameter
+you may also compute the lookup table yourself. The method is basically
+computing averages of each ToT value for each cToT above a certain threshold.
+This threshold is the ctot-cut parameter.
+
+In this example we also fit the lookup table to an equation that models the
+shape of the curve.
+
+.. note::
+
+    Parameter fitting can be unstable. It is also fine to the use values as-is, without curve fitting.
+
+.. _ex10_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex9_timewalk_lut_construction_luna_command.txt
+   :language: bash
+
+.. _ex9_python_script:
+
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex9_timewalk_lut_construction.py
+   :language: python
+   :caption: Creating a lookup table from the Timewalk Matrix
+   :linenos:
+
+.. _ex9_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex9_timewalk_lut_construction.txt
+   :language: python
+   :caption: Example Output
+
+
+.. image:: ../_static/examples_output/plots/ex9_timewalk_lut_construction.png
+   :align: center
+   :alt: 2D histogram of clusters
+   :width: 80%
+

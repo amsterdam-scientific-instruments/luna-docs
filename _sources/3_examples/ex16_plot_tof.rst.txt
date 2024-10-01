@@ -1,0 +1,37 @@
+Plot ToF
+=========
+
+This example demonstrates how to read the HDF5 output of Luna containing Time of Flight information 
+and plot it using `pandas`.
+
+.. _ex17_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex16_plot_tof_luna_command.txt
+   :language: bash
+
+.. _ex16_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex16_plot_tof.py
+   :language: python
+   :caption: Python code to read HDF5 data with ToF and plot a simple histogram.
+   :linenos:
+
+.. _ex16_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex16_plot_tof.txt
+   :language: python
+   :caption: Example Output
+
+.. image:: ../_static/examples_output/plots/ex16_plot_tof_data.png
+   :align: center
+   :alt: Histogram with the ToF for pixels
+   :width: 80%

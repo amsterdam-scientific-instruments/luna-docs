@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Accumulate timewalk statistics &#8212; luna 0.3.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6b2e5161" />
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/copytoclipboard.js?v=38cfd8db"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Plot ToF" href="ex16_plot_tof.html" />
+    <link rel="prev" title="Apply the timewalk correction" href="ex14_apply_timewalk_correction.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=orange data-md-color-accent=amber>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#3_examples/ex15_accumulate_timewalk_statistics" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="luna 0.3.2 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">luna-logo.png</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Luna Documentation</span>
+          <span class="md-header-nav__topic"> Accumulate timewalk statistics </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">luna 0.3.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="examples.html" class="md-tabs__link">Examples</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="luna 0.3.2 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">luna-logo.png</i>
+      
+    </a>
+    <a href="../index.html"
+       title="luna 0.3.2 documentation">Luna Documentation</a>
+  </label>
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../index.html" class="md-nav__link">Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/usage.html" class="md-nav__link">Usage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/cli_configuration.html" class="md-nav__link">Command Line Interface</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../1_usage/yaml_configuration.html" class="md-nav__link">Yaml Interface</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/concepts.html" class="md-nav__link">Concepts</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/time_units.html" class="md-nav__link">Time Units in Luna</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/time_binning.html" class="md-nav__link">Time Binning</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/clustering.html" class="md-nav__link">Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/timewalk.html" class="md-nav__link">Timewalk Correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../2_concepts/time_of_flight.html" class="md-nav__link">Time-of-Flight (ToF)</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="examples.html" class="md-nav__link">Examples</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="ex1_read_data.html" class="md-nav__link">Read Data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex2_read_data_time_units.html" class="md-nav__link">Read data, Unit Conversion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex3_plot_pixel_2d_histogram.html" class="md-nav__link">Plot Pixel Data: 2D Histogram</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex4_plot_pixel_2d_histogram_time_slice.html" class="md-nav__link">Plot Pixel Data: 2D Histogram Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex5_plot_cluster_2d_histogram.html" class="md-nav__link">Plot Pixel Data: Time Slice</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex6_plot_distributions.html" class="md-nav__link">Plotting Distributions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex7_correct_toa_for_timewalk.html" class="md-nav__link">Time-walk Correction: Apply</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex8_timewalk_matrix.html" class="md-nav__link">Time-walk Correction: Matrix</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex9_timewalk_lut_construction.html" class="md-nav__link">Time-walk Correction: Constructing LUT</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex10_hdf5_compression_investigation.html" class="md-nav__link">Hdf5 Compression Investigation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex11_raw_only_analysis.html" class="md-nav__link">Raw only Analysis</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex12_disable_clustering.html" class="md-nav__link">Disable Clustering</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex13_kuttruff_clustering_algorithm.html" class="md-nav__link">The Kuttruff Clustering Algorithm</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex14_apply_timewalk_correction.html" class="md-nav__link">Apply the timewalk correction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Accumulate timewalk statistics </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Accumulate timewalk statistics</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#3-examples-ex15-accumulate-timewalk-statistics--page-root" class="md-nav__link">Accumulate timewalk statistics</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#luna-command" class="md-nav__link">Luna Command</a>
+        </li>
+        <li class="md-nav__item"><a href="#python-script" class="md-nav__link">Python Script</a>
+        </li>
+        <li class="md-nav__item"><a href="#script-output" class="md-nav__link">Script Output</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/3_examples/ex15_accumulate_timewalk_statistics.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="ex16_plot_tof.html" class="md-nav__link">Plot ToF</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#3-examples-ex15-accumulate-timewalk-statistics--page-root" class="md-nav__link">Accumulate timewalk statistics</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#luna-command" class="md-nav__link">Luna Command</a>
+        </li>
+        <li class="md-nav__item"><a href="#python-script" class="md-nav__link">Python Script</a>
+        </li>
+        <li class="md-nav__item"><a href="#script-output" class="md-nav__link">Script Output</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/3_examples/ex15_accumulate_timewalk_statistics.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="accumulate-timewalk-statistics">
+<h1 id="3-examples-ex15-accumulate-timewalk-statistics--page-root">Accumulate timewalk statistics<a class="headerlink" href="#3-examples-ex15-accumulate-timewalk-statistics--page-root" title="Link to this heading">¶</a></h1>
+<p>Timewalk correction is in Luna is statistical and as such relies on large sample sizes for accuracy. You
+can accumulate a timewalk matrix across similar experiments to increase the N.</p>
+<section id="luna-command">
+<span id="ex15-luna-command"></span><h2 id="luna-command">Luna Command<a class="headerlink" href="#luna-command" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./tpx3dump<span class="w"> </span>process<span class="w"> </span>--input-files<span class="w"> </span>/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data.tpx3<span class="w"> </span>--layout<span class="w"> </span>single<span class="w"> </span>--clustering-algorithm<span class="w"> </span>DFSCluster<span class="w"> </span>--eps-t<span class="w"> </span>100ns<span class="w"> </span>--eps-s<span class="w"> </span><span class="m">1</span><span class="w"> </span>--calculate-timewalk-statistics<span class="w"> </span>--output-file<span class="w"> </span>/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data.h5
+./tpx3dump<span class="w"> </span>process<span class="w"> </span>--input-files<span class="w"> </span>/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data.tpx3<span class="w"> </span>--output-file<span class="w"> </span>/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data2.h5<span class="w"> </span>--layout<span class="w"> </span>single<span class="w"> </span>--clustering-algorithm<span class="w"> </span>DFSCluster<span class="w"> </span>--eps-t<span class="w"> </span>100ns<span class="w"> </span>--eps-s<span class="w"> </span><span class="m">1</span><span class="w"> </span>--timewalk-file<span class="w"> </span>/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/example_data.h5<span class="w"> </span>--ctot-cut<span class="w"> </span><span class="m">450</span>
+</pre></div>
+</div>
+</section>
+<section id="python-script">
+<span id="ex15-python-script"></span><h2 id="python-script">Python Script<a class="headerlink" href="#python-script" title="Link to this heading">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Accumulation of timewalk statistics across experiments</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">h5py</span>  <span class="c1"># ensure you have `pip install h5py`</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>  <span class="c1"># ensure you have `pip install pandas`</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="linenos"> 7</span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>  <span class="c1"># suppress warnings from plotting libraries.</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">"talk"</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># add some paths to PYTHONPATH</span>
+<span class="linenos">16</span><span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">".."</span><span class="p">,</span> <span class="s2">"."</span><span class="p">]:</span>
+<span class="linenos">17</span>    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="n">directory</span><span class="p">)))</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># on our system "EXAMPLE_DATA_HDF5" refers to the absolute path</span>
+<span class="linenos">20</span><span class="c1"># to a hdf5 file generated by luna. Replace with your own!</span>
+<span class="linenos">21</span><span class="kn">from</span> <span class="nn">env_vars_for_docs_examples</span> <span class="kn">import</span> <span class="n">EXAMPLE_DATA_HDF5</span><span class="p">,</span> <span class="n">EXAMPLE2_DATA_HDF5</span><span class="p">,</span> <span class="n">PLOTS_DIRECTORY</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># re-use functions from previous example</span>
+<span class="linenos">24</span><span class="kn">from</span> <span class="nn">ex2_read_data_time_units</span> <span class="kn">import</span> <span class="n">TimeUnit</span><span class="p">,</span> <span class="n">load_pixel_hits</span>
+<span class="linenos">25</span><span class="kn">from</span> <span class="nn">ex11_raw_only_analysis</span> <span class="kn">import</span> <span class="n">plot_toa</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="n">TOA_UNIT</span> <span class="o">=</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="n">Nanoseconds</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>    <span class="n">toa_before_correction_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PLOTS_DIRECTORY</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"ex14_apply_timewalk_correction_toa_before_correction.png"</span><span class="p">)</span>
+<span class="linenos">33</span>    <span class="n">toa_after_correction_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PLOTS_DIRECTORY</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"ex14_apply_timewalk_correction_toa_after_correction.png"</span><span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>    <span class="n">pixel_hits_before_correction</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">load_pixel_hits</span><span class="p">(</span><span class="n">EXAMPLE_DATA_HDF5</span><span class="p">,</span> <span class="n">toa_unit</span><span class="o">=</span><span class="n">TimeUnit</span><span class="o">.</span><span class="n">Microseconds</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">pixel_hits_after_correction</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">load_pixel_hits</span><span class="p">(</span><span class="n">EXAMPLE2_DATA_HDF5</span><span class="p">,</span> <span class="n">toa_unit</span><span class="o">=</span><span class="n">TimeUnit</span><span class="o">.</span><span class="n">Microseconds</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">39</span>    <span class="n">stop</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="linenos">40</span>    <span class="n">plot_toa</span><span class="p">(</span><span class="n">pixel_hits_before_correction</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="n">toa_before_correction_fname</span><span class="p">,</span><span class="n">time_units</span><span class="o">=</span><span class="n">TOA_UNIT</span><span class="p">)</span>
+<span class="linenos">41</span>    <span class="n">plot_toa</span><span class="p">(</span><span class="n">pixel_hits_after_correction</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="n">toa_after_correction_fname</span><span class="p">,</span><span class="n">time_units</span><span class="o">=</span><span class="n">TOA_UNIT</span><span class="p">)</span>
+<span class="linenos">42</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="script-output">
+<span id="ex15-script-output"></span><h2 id="script-output">Script Output<a class="headerlink" href="#script-output" title="Link to this heading">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Example Output</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdf5</span> <span class="n">datasets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Clusters'</span><span class="p">,</span> <span class="s1">'ExposureTimeBoundaries'</span><span class="p">,</span> <span class="s1">'PixelHits'</span><span class="p">,</span> <span class="s1">'TimewalkLookupTable'</span><span class="p">,</span> <span class="s1">'TimewalkMatrix'</span><span class="p">]</span>
+<span class="n">hdf5</span> <span class="n">datasets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Clusters'</span><span class="p">,</span> <span class="s1">'ExposureTimeBoundaries'</span><span class="p">,</span> <span class="s1">'PixelHits'</span><span class="p">]</span>
+<span class="n">Plot</span> <span class="n">saved</span> <span class="n">to</span> <span class="s2">"/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/examples_output/plots/ex14_apply_timewalk_correction_toa_before_correction.png"</span>
+<span class="n">Plot</span> <span class="n">saved</span> <span class="n">to</span> <span class="s2">"/Users/Ciaran/atlassian-bitbucket-pipelines-runner/temp/e71169e4-520a-5b30-a5ab-ee8a44eb5fac/build/docs/source/_static/examples_output/plots/ex14_apply_timewalk_correction_toa_after_correction.png"</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="ex14_apply_timewalk_correction.html" title="Apply the timewalk correction"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> Apply the timewalk correction </span>
+              </div>
+            </a>
+          
+          
+            <a href="ex16_plot_tof.html" title="Plot ToF"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> Plot ToF </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Ciaran Welsh.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

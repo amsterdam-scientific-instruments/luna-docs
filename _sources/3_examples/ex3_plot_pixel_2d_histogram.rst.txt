@@ -1,0 +1,41 @@
+Plot Pixel Data: 2D Histogram
+================================
+
+This example demonstrates how to read the HDF5 output of Luna
+using `h5py` and `pandas` and shows you how to convert the ToA time units
+to whatever you like.
+
+.. _ex3_luna_command:
+
+Luna Command
+------------
+
+.. literalinclude:: ../_static/examples_output/ex3_plot_pixel_2d_histogram_luna_command.txt
+   :language: bash
+
+.. _ex3_python_script:
+
+Python Script
+-------------
+
+.. literalinclude:: ./python/ex3_plot_pixel_2d_histogram.py
+   :language: python
+   :caption: Plot a 2D histogram of pixel hits using matplotlib
+   :linenos:
+
+
+.. _ex3_script_output:
+
+Script Output
+-------------
+
+.. literalinclude:: ../_static/examples_output/ex3_plot_pixel_2d_histogram.txt
+   :language: python
+   :caption: Example Output
+
+.. image:: ../_static/examples_output/plots/ex3_plot_pixel_2d_histogram_tot.png
+   :align: center
+   :alt: 2D histogram of pixel hits
+   :width: 80%
+
+
